@@ -1,8 +1,6 @@
 #include <iostream>
-#include "SIFT_Matcher.h"
 #include "Homography.h"
 #include "APAP_Processor.h"
-#include "RANSAC_Processor.h"
 #include "MathUtils.h"
 #include "segmentation.h"
 #include <chrono>
