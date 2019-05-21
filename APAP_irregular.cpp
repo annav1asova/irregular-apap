@@ -2,7 +2,6 @@
 
 void APAP_irregular::calculate_Wi_Matrices(Mat img, vector<Point2d> &obj) {
     points = obj;
-    cout << "points size" << points.size();
     for (int i = 0; i < allRegions.size(); i++) {
         Rect cell = allRegions[i].roi;
         int centerX = cell.x + cell.width / 2;
@@ -10,14 +9,10 @@ void APAP_irregular::calculate_Wi_Matrices(Mat img, vector<Point2d> &obj) {
         MatrixXd Wi = APAP::calculate_Wi_forPoint(centerX, centerY);
         allRegions[i].Wi = Wi;
     }
-    cout << "allreg size" << allRegions.size() << endl;
-
 }
 
 
 void APAP_irregular::calculate_CellHomography(MatrixXd &A) {
-    cout << "calculate cell homography" << endl;
-
     for (size_t i = 0; i < allRegions.size(); i++) {
         MatrixXd WA = allRegions[i].Wi * A;
         Matrix3d H;
@@ -72,8 +67,6 @@ void APAP_irregular::findGrid(int &gridIndex, double x, double y, GridBox *grids
 
 
 void APAP_irregular::ConvertImage(const Mat &img, Mat &target) {
-    cout << "convert image" << endl;
-
     int Width = img.size().width, Height = img.size().height;
     GridBox *grids = getIndex(x_offset, y_offset);
     target = Mat::zeros(height, width, img.type());

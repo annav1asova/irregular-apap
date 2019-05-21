@@ -14,20 +14,20 @@ class APAP {
 
         vector<Point2d> points;
 
-        virtual void calculate_Wi_Matrices(Mat img, vector<Point2d> &obj) {}; //cor
+        virtual void calculate_Wi_Matrices(Mat img, vector<Point2d> &obj) {};
 
-        virtual void calculate_CellHomography(MatrixXd &A) {}; //cor
+        virtual void calculate_CellHomography(MatrixXd &A) {};
 
-        virtual void ConvertImage(const Mat &img, Mat &target) {}; // cor
-
-        bool isBlack(const Mat &img, int x, int y, uchar &b, uchar &g, uchar &r);
-
-
-        uchar getWarpValue(uchar val1, uchar val2, int weight1, int weight2);
+        virtual void ConvertImage(const Mat &img, Mat &target) {};
 
         void warpImage(const Mat &image_1, const Mat &img_2, Mat &target);
 
         MatrixXd calculate_Wi_forPoint(double x, double y);
 
-        APAP() {};
+    APAP() {};
+
+    private:
+        bool isBlack(const Mat &img, int x, int y, uchar &b, uchar &g, uchar &r);
+
+        uchar getWarpValue(uchar val1, uchar val2, int weight1, int weight2);
 };

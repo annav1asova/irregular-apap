@@ -3,7 +3,6 @@
 #include "APAP.h"
 #include "APAP_irregular.h"
 #include "APAP_regular.h"
-
 #include "MathUtils.h"
 #include "segmentation.h"
 #include <chrono>
@@ -12,8 +11,6 @@
 using namespace cv;
 using namespace std;
 using namespace Eigen;
-//const char* surface_path = "C:\\Users\\atsst\\Pictures\\Saved Pictures\\";
-//const char* pc_path = "C:\\Users\\Administrator\\Pictures\\Saved Pictures\\opencv\\";
 
 const char* pc_path = "/Users/annavlasova/Desktop/Новая папка/rgb";
 

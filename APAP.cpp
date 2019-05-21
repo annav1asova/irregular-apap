@@ -42,8 +42,7 @@ void APAP::warpImage(const Mat &image_1, const Mat &img_2, Mat &target) {
     imshow("APAP target", target);
 }
 
-MatrixXd APAP::calculate_Wi_forPoint(double x, double y) // оставить
-{
+MatrixXd APAP::calculate_Wi_forPoint(double x, double y) {
     const double sigma_squared = sigma * sigma;
     MatrixXd Wi(2 * points.size(), 2 * points.size());
     Wi.setZero();
