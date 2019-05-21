@@ -2,7 +2,7 @@
 using namespace std;
 using namespace cv;
 using namespace Eigen;
-//ÏòÁ¿µã³Ë
+
 double getMultiply(Vector3d a, Vector3d b)
 {
 	double ax = a[0], ay = a[1], az = a[2];
@@ -10,12 +10,11 @@ double getMultiply(Vector3d a, Vector3d b)
 	return ax*bx + ay*by + az*bz;
 }
 
-//¾àÀëµÄÆ½·½
+
 double getSqrDist(double x, double y, double u, double v) {
 	return (x - u) * (x - u) + (y - v) * (y - v);
 }
 
-//×ø±ê×ª»»
 void ConvertCoordinates(int x, int y, double& target_x, double& target_y, Matrix3d H)
 {
 	Vector3d h1 = H.row(0), h2 = H.row(1), h3 = H.row(2);
@@ -24,7 +23,7 @@ void ConvertCoordinates(int x, int y, double& target_x, double& target_y, Matrix
 	target_y = getMultiply(h2, xy_vec) / getMultiply(h3, xy_vec);
 }
 
-//h×ªH
+
 Matrix3d rollVectorToH(VectorXd h)
 {
 	Matrix3d H;
@@ -36,7 +35,6 @@ Matrix3d rollVectorToH(VectorXd h)
 }
 
 
-//×ª»¯×ø±êµã
 void ConvertPoint(int& x, int& y, int Width, int Height)
 {
 	x = x > 0 ? (x < Width ? x : Width - 1) : 0;
@@ -45,10 +43,10 @@ void ConvertPoint(int& x, int& y, int Width, int Height)
 
 
 /**
- * µ¥µãµÄrgbË«ÏßÐÔ²åÖµ×ª»»
- * x y ËùÇóµã×ø±ê
- * x1 y1 x2 y2 ËÄ¸ö½ÇµÄ×ø±ê
- * valij ¶ÔÓ¦(xi,yj)µãµÄÖµ
+ * ï¿½ï¿½ï¿½ï¿½ï¿½rgbË«ï¿½ï¿½ï¿½Ô²ï¿½Öµ×ªï¿½ï¿½
+ * x y ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * x1 y1 x2 y2 ï¿½Ä¸ï¿½ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½
+ * valij ï¿½ï¿½Ó¦(xi,yj)ï¿½ï¿½ï¿½Öµ
  */
 void Bilinear_Interpolation(double x, double y, int x1, int y1, int x2, int y2,
 	uchar& target, uchar val11, uchar val12, uchar val21, uchar val22)
@@ -69,10 +67,10 @@ void getRGB(const Mat& img, int x, int y, uchar& b, uchar& g, uchar& r)
 
 
 /**
- * Ë«Ïß²åÖµ
- * \param Width Height Í¼Ïñ³¤¿í£¬ÁÙ½çÖµ
- * \param raw_x raw_y ´ý×ª»»×ø±êµã
- * \param b g r Ä¿±ê×ø±êr g bÖµ
+ * Ë«ï¿½ß²ï¿½Öµ
+ * \param Width Height Í¼ï¿½ñ³¤¿ï¿½ï¿½Ù½ï¿½Öµ
+ * \param raw_x raw_y ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * \param b g r Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½r g bÖµ
  */
 void ConvertPoint(const Mat& img, int Width, int Height, double raw_x, double raw_y, uchar& b, uchar& g, uchar& r)
 {
@@ -81,7 +79,7 @@ void ConvertPoint(const Mat& img, int Width, int Height, double raw_x, double ra
 	ConvertPoint(x1, y1, Width, Height);
 	ConvertPoint(x2, y2, Width, Height);
 	/*
-	 * Ë«Ïß²åÖµ 
+	 * Ë«ï¿½ß²ï¿½Öµ 
 	 * Q11(x1, y1)
 	 * Q12(x1, y2)
 	 * Q21(x2, y1)

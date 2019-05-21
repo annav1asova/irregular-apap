@@ -5,7 +5,6 @@
 
 #include <opencv2/opencv.hpp>
 #include <iostream>
-//#include <vector>
 
 struct region {
     // tree data structure

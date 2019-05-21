@@ -30,7 +30,7 @@ add_executable(APAP_Processor_master
         APAP_irregular.h
         APAP_irregular.cpp
         APAP_regular.cpp
-        APAP_regular.h)
+        APAP_regular.h MatchDetector.cpp MatchDetector.h)
 
 link_directories(${VLFEAT_LIB})
 

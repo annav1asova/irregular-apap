@@ -1,8 +1,4 @@
-#pragma once
-#include "GridBox.h"
-#include "segmentation.h"
 #include "APAP.h"
-
 
 class APAP_irregular: public APAP {
     public:
