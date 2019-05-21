@@ -1,6 +1,9 @@
 #include <iostream>
 #include "Homography.h"
-#include "APAP_Processor.h"
+#include "APAP.h"
+#include "APAP_irregular.h"
+#include "APAP_regular.h"
+
 #include "MathUtils.h"
 #include "segmentation.h"
 #include <chrono>
@@ -21,7 +24,10 @@ vector<KeyPoint> left_keypoint, right_keypoint;
 int main() {
 	auto start = std::chrono::system_clock::now();
 
-	region r = segment_region();
+	const char* img1_path = "/Users/annavlasova/Desktop/Новая папка/rgb/1.png";
+	const char* img2_path = "/Users/annavlasova/Desktop/Новая папка/rgb/2.png";
+
+	region r = segment_region(img1_path);
 
 	vector<region> allRegions;
 	getRegionList(r, allRegions);
@@ -31,9 +37,6 @@ int main() {
 //	string imagename1 = current_path + "2.png",
 //		   imagename2 = current_path + "1.png";
 //	Mat img_1 = imread(imagename1), img_2 = imread(imagename2);
-
-	const char* img1_path = "/Users/annavlasova/Desktop/Новая папка/rgb/1.png";
-	const char* img2_path = "/Users/annavlasova/Desktop/Новая папка/rgb/2.png";
 
 	Mat img_1, img_2;
 
@@ -70,35 +73,25 @@ int main() {
 	vector<MatrixXd> Wi_Vector;
 	vector<Matrix3d> H_vectors;
 	cout << "Calculating homography..." << endl;
-	//getHomography(keyPoints_scene, keyPoints_obj, scene, obj, H, A);
 	getHomography(right_keypoint, left_keypoint, scene, obj, H, A);
 
 	cout << "H : " << H << endl;
 
-//	cout << "Calculating Weighted matrices..." << endl;
-//	calculate_Wi_Matrices(img_2, scene, Wi_Vector);
-//	cout << "testing..." << endl;
-//	H_vectors = calculate_CellHomography(Wi_Vector, A);
-//	Mat homography_target, display;
-//	cout << "Converting image 2..." << endl;
-//	ConvertImage(img_2, homography_target, H_vectors, C1, C2);
-//	cout << "Converting image 3..." << endl;
-//
-//	warpImage(img_1, homography_target, display);
+
+//	APAP *apap = new APAP_regular(C1, C2);
+	APAP *apap = new APAP_irregular(allRegions);
 
 
 	cout << "Calculating Weighted matrices..." << endl;
-	calculate_Wi_Matrices(img_2, scene, allRegions);
+	apap->calculate_Wi_Matrices(img_2, scene);
 	cout << "testing..." << endl;
-    int x_offset = 0, y_offset = 100;
-
-    calculate_CellHomography(allRegions, A, x_offset, y_offset);
+	apap->calculate_CellHomography(A);
 	Mat homography_target, display;
 	cout << "Converting image 2..." << endl;
-	ConvertImage(img_2, homography_target, allRegions, x_offset, y_offset);
+	apap->ConvertImage(img_2, homography_target);
 	cout << "Converting image 3..." << endl;
 
-	warpImage(img_1, homography_target, display);
+	apap->warpImage(img_1, homography_target, display);
 
 	auto end = std::chrono::system_clock::now();
 	std::chrono::duration<double> elapsed_seconds = end-start;

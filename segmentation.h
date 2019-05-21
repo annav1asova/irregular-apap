@@ -23,6 +23,6 @@ struct region {
     cv::Mat mask; // for debug. don't use in real cases because it is computationally too heavy.
 };
 
-region segment_region();
+region segment_region(const String& filename);
 
 void getRegionList(region r, vector<region> &listRegion);

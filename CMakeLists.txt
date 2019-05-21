@@ -13,8 +13,8 @@ include_directories(${EIGEN3_INCLUDE_DIR}
                     ${VLFEAT_INCLUDE})
 
 add_executable(APAP_Processor_master
-                APAP_Processor.cpp
-        APAP_Processor.h
+        APAP.cpp
+        APAP.h
         features.txt
         GridBox.cpp
         GridBox.h
@@ -26,7 +26,11 @@ add_executable(APAP_Processor_master
         stdafx.h
         Wi.txt
         segmentation.cpp
-        segmentation.h)
+        segmentation.h
+        APAP_irregular.h
+        APAP_irregular.cpp
+        APAP_regular.cpp
+        APAP_regular.h)
 
 link_directories(${VLFEAT_LIB})
 

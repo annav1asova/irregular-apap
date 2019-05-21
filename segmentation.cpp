@@ -134,7 +134,7 @@ void getRegionList(region r, vector<region> &listRegion) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------- main
-region segment_region() {
+region segment_region(const String& filename) {
 //    img = imread("/Users/annavlasova/Downloads/rgbd_dataset_freiburg2_xyz_secret/depth/1311867446.162142.png", 0);
 
     img = imread("/Users/annavlasova/Desktop/Новая папка/depth/1.png", 0);
